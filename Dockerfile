@@ -1,10 +1,25 @@
 FROM haskell:9.4
 
+# CRITICAL FIX: Debian 10 (Buster) EOL
+RUN echo "deb http://archive.debian.org/debian buster main" > /etc/apt/sources.list \
+    && echo "deb http://archive.debian.org/debian-security buster/updates main" >> /etc/apt/sources.list \
+    && echo "Acquire::Check-Valid-Until false;" > /etc/apt/apt.conf.d/99no-check-valid-until
+
 ENV DEBIAN_FRONTEND=noninteractive
 
 # 1. Install system tools
 RUN apt-get update && apt-get install -y \
-    zsh curl git sudo build-essential libffi-dev libgmp-dev libncurses-dev libtinfo-dev \
+    zsh \
+    curl \
+    git \
+    sudo \
+    build-essential \
+    libffi-dev \
+    libgmp-dev \
+    libncurses-dev \
+    libtinfo-dev \
+    zlib1g-dev \
+    libssl-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # 2. Create 'vscode' user
