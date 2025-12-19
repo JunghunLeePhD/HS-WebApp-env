@@ -1,6 +1,6 @@
 # 1. Use a lightweight, modern base (Debian 11 Bullseye)
 # This removes the "Double GHC" issue and the need for EOL hacks.
-FROM debian:bullseye-slim
+FROM debian:bookworm-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
 
